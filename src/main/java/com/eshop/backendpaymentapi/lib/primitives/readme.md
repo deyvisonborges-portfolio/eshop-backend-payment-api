@@ -1,0 +1,1 @@
+Aqui temos os nossos objetos de valor, que são em "valores primitivos" no meu contexto da aplicação.
