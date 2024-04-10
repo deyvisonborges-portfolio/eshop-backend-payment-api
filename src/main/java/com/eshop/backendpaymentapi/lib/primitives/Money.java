@@ -1,4 +1,4 @@
-package com.mach.machorderrestapi.common.primitives;
+package com.eshop.backendpaymentapi.lib.primitives;
 
 public final class Money {
 	public static final Money ZERO = new Money(0.f);

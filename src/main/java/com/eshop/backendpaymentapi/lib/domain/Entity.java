@@ -1,0 +1,48 @@
+package com.eshop.backendpaymentapi.lib.domain;
+
+import java.time.Instant;
+import java.util.Objects;
+
+public abstract class Entity<ID extends Identifier> {
+	protected final ID id;
+  protected final Boolean active;
+  protected final Instant createdAt;
+  protected final Instant updatedAt;
+
+	protected Entity(final ID id, final Boolean active, final Instant createdAt, final Instant updatedAt) {
+		Objects.requireNonNull(id, "'id' should not be null");
+		this.id = id;
+    this.active = active != null ? active : true;
+    this.createdAt = createdAt != null ? createdAt : Instant.now();
+    this.updatedAt = updatedAt != null ? updatedAt : Instant.now();
+	}
+
+	public ID getId() {
+		return this.id;
+	}
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public Instant getCreatedAt() {
+    return createdAt;
+  }
+
+  public Instant getUpdatedAt() {
+    return updatedAt;
+  }
+
+  @Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final Entity<?> entity = (Entity<?>) o;
+		return Objects.equals(getId(), entity.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId());
+	}
+}
