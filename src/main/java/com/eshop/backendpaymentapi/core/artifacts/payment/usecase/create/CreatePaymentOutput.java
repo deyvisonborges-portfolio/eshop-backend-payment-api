@@ -1,7 +1,7 @@
 package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.create;
 
-import com.mach.core.artifact.payment.Payment;
-import com.mach.core.artifact.payment.PaymentID;
+import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
+import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentID;
 
 public record CreatePaymentOutput(
 	PaymentID id
