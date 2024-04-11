@@ -1,5 +1,6 @@
 package com.eshop.backendpaymentapi.app.persistence.payment;
 
+import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 import jakarta.persistence.Column;
@@ -67,6 +68,21 @@ public class PaymentJPAEntity {
     this.paidIn = paidIn;
     this.orderId = orderId;
     this.customerId = customerId;
+  }
+
+  public static PaymentJPAEntity from(final Payment payment) {
+    return new PaymentJPAEntity(
+      payment.getId().getValue(),
+      payment.getActive(),
+      payment.getCreatedAt(),
+      payment.getUpdatedAt(),
+      payment.getValue(),
+      payment.getStatus(),
+      payment.getMethod(),
+      payment.getPaidIn(),
+      payment.getOrderId(),
+      payment.getCustomerId()
+    );
   }
 
   public String getId() {

@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface BaseRepositoryContract<E> {
   void save(E e);
   void update(E e);
-  void delete(Identifier id);
-  Optional<E> findById(Identifier id);
+  void delete(String id);
+  Optional<E> findById(String id);
 }
