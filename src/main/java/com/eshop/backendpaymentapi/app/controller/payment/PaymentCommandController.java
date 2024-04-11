@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PaymentController {
+public class PaymentCommandController {
   private final CreatePaymentHandler createPaymentHandler;
   private final PaymentJPARepository paymentJPARepository;
 
-	public PaymentController(CreatePaymentHandler createPaymentHandler, PaymentJPARepository paymentJPARepository) {
+	public PaymentCommandController(CreatePaymentHandler createPaymentHandler, PaymentJPARepository paymentJPARepository) {
 		this.paymentJPARepository = paymentJPARepository;
 		this.createPaymentHandler = new CreatePaymentHandler(paymentJPARepository);
 	}
