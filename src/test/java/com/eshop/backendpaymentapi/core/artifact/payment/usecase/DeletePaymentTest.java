@@ -1,52 +1,75 @@
+/**
+ * Esta classe contém testes para a funcionalidade de exclusão de pagamento.
+ */
 package com.eshop.backendpaymentapi.core.artifact.payment.usecase;
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.delete.DeletePaymentCommand;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.delete.DeletePaymentHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
 import java.util.UUID;
 
+/**
+ * Esta classe contém os testes unitários para a funcionalidade de exclusão de pagamento.
+ */
+@ExtendWith(MockitoExtension.class)
 public class DeletePaymentTest {
+  /**
+   * Mock para simular o comportamento de um repositório de pagamentos.
+   */
   @Mock
   private PaymentRepositoryContract repository;
 
+  /**
+   * Instância da classe handler que será testada.
+   */
   @InjectMocks
   private DeletePaymentHandler handler;
 
+  /**
+   * Este método é executado antes de cada teste para redefinir o estado dos mocks.
+   */
   @BeforeEach
   void cleanUp() {
-    Mockito.reset(handler);
+    Mockito.reset(repository);
   }
 
+  /**
+   * Testa o caso em que um comando de exclusão válido é passado e o pagamento é excluído com sucesso.
+   */
   @Test
   public void givenAValidCommand_whenCallsDeletePayment_shouldBeOk() {
     final var id = UUID.randomUUID().toString();
     final var payment = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.DEBIT_CARD, Instant.now(), id, id);
 
-    final var expectedId = payment.getId();
+    final var expectedCommand = new DeletePaymentCommand(payment.getId().toString());
 
     /*
-    * O que sera feito antes e depois no quando
-    * */
+     * Configura o comportamento do mock repository para esperar a chamada do método delete
+     * */
     Mockito.doNothing().when(repository).delete(
-        Mockito.eq(
-          expectedId.getValue()
-        )
-      );
+      Mockito.eq(
+        expectedCommand.id()
+      )
+    );
 
-    Assertions.assertDoesNotThrow(() -> this.handler.execute(expectedId.getValue()));
+    Assertions.assertDoesNotThrow(() -> this.handler.execute(expectedCommand));
 
     /*
-    * Verifica se foi chamado pelo menos uma vez
-    * */
-    Mockito.verify(repository, Mockito.times(1)).delete(expectedId.getValue());
+     * Verifica se o método delete foi chamado exatamente uma vez
+     * */
+    Mockito.verify(repository, Mockito.times(1)).delete(expectedCommand.id());
   }
 }

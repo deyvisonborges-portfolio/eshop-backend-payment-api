@@ -4,10 +4,10 @@ import java.time.Instant;
 import java.util.Objects;
 
 public abstract class Entity<ID extends Identifier> {
-	protected final ID id;
-  protected final Boolean active;
-  protected final Instant createdAt;
-  protected final Instant updatedAt;
+	protected ID id;
+  protected Boolean active;
+  protected Instant createdAt;
+  protected Instant updatedAt;
 
 	protected Entity(final ID id, final Boolean active, final Instant createdAt, final Instant updatedAt) {
 		Objects.requireNonNull(id, "'id' should not be null");

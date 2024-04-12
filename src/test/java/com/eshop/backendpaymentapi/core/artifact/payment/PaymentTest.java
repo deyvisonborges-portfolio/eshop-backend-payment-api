@@ -26,10 +26,9 @@ public class PaymentTest {
     final String orderId = "123456";
     final String customerId = "789";
 
-    final var payment = new Payment(paymentId, value, status, method, paidIn, orderId, customerId);
+    final var payment = new Payment(value, status, method, paidIn, orderId, customerId);
 
     Assertions.assertNotNull(payment);
-    Assertions.assertEquals(paymentId, payment.getId());
     Assertions.assertEquals(value, payment.getValue());
     Assertions.assertEquals(status, payment.getStatus());
     Assertions.assertEquals(method, payment.getMethod());
@@ -55,21 +54,5 @@ public class PaymentTest {
     final var payment2 = Payment.factory(200.00, PaymentStatus.PENDING, PaymentMethod.CREDIT_CARD, Instant.now(), "789", "101");
 
     Assertions.assertNotEquals(payment1.getId(), payment2.getId());
-  }
-
-  @Test
-  void validateEqualityOfPayments() {
-    final PaymentID paymentId = PaymentID.unique();
-    final double value = 100.00;
-    final PaymentStatus status = PaymentStatus.PENDING;
-    final PaymentMethod method = PaymentMethod.CREDIT_CARD;
-    final Instant paidIn = Instant.now();
-    final String orderId = "123456";
-    final String customerId = "789";
-
-    final var payment1 = new Payment(paymentId, value, status, method, paidIn, orderId, customerId);
-    final var payment2 = new Payment(paymentId, value, status, method, paidIn, orderId, customerId);
-
-    Assertions.assertEquals(payment1, payment2);
   }
 }

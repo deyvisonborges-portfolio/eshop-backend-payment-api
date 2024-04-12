@@ -15,7 +15,6 @@ public class Payment extends AggregateRoot<PaymentID> {
   private final String customerId;
 
   public Payment(
-    final PaymentID paymentID,
     final double value,
     final PaymentStatus status,
     final PaymentMethod method,
@@ -23,7 +22,7 @@ public class Payment extends AggregateRoot<PaymentID> {
     final String orderId,
     final String customerId
   ) {
-    super(paymentID, true, Instant.now(), Instant.now());
+    super(PaymentID.unique(), true, Instant.now(), Instant.now());
     this.value = value;
     this.status = status;
     this.method = method;
@@ -41,7 +40,6 @@ public class Payment extends AggregateRoot<PaymentID> {
     final String customerId
   ) {
     return new Payment(
-      PaymentID.unique(),
       value,
       status,
       method,
@@ -53,13 +51,23 @@ public class Payment extends AggregateRoot<PaymentID> {
 
   public static Payment emptyFactory() {
     return new Payment(
-      PaymentID.unique(),
       0.0,
       null,
       null,
       null,
       null,
       null
+    );
+  }
+
+  public Payment clone() {
+    return new Payment(
+      this.value,
+      this.status,
+      this.method,
+      this.paidIn,
+      this.orderId,
+      this.customerId
     );
   }
 
@@ -89,5 +97,9 @@ public class Payment extends AggregateRoot<PaymentID> {
 
   public String getCustomerId() {
     return customerId;
+  }
+
+  public void setId(PaymentID id) {
+    super.id = id;
   }
 }
