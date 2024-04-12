@@ -30,6 +30,5 @@ public class CreatePaymentTest {
 
     final var output = handler.execute(command);
     Assertions.assertNotNull(output);
-    System.out.println(output.id());
   }
 }
