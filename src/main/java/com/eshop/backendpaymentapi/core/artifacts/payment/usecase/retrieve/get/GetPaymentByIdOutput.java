@@ -1,4 +1,4 @@
-package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve;
+package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get;
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
