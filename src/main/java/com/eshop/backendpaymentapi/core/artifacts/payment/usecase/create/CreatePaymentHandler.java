@@ -9,13 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class CreatePaymentHandler extends UseCaseContract<CreatePaymentCommand, CreatePaymentOutput> {
   private final Logger logger = LoggerFactory.getLogger(CreatePaymentHandler.class);
 	private final PaymentRepositoryContract repository;
 
 	public CreatePaymentHandler(PaymentRepositoryContract repository) {
-		this.repository = repository;
+		this.repository = Objects.requireNonNull(repository);
 	}
 
 	@Override
