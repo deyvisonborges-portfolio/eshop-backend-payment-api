@@ -1,0 +1,8 @@
+{
+  "value": 100.50,
+  "status": "PAID",
+  "method": "CREDIT_CARD",
+  "paid_in": "2024-04-11T08:30:00Z",
+  "order_id": "ORD123456",
+  "customer_id": "CUST789"
+}

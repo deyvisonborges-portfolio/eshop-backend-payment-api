@@ -5,8 +5,8 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentID;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
-import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get.GetPaymentByIdCommand;
-import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get.GetPaymentByIdHandler;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get.GetPaymentByIdQuery;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get.GetPaymentByIdQueryHandler;
 import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,12 +22,12 @@ import java.time.Instant;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class GetPaymentByIdHandlerTest {
+public class GetPaymentByIdQueryHandlerTest {
   @Mock
   private PaymentRepositoryContract repository;
 
   @InjectMocks
-  private GetPaymentByIdHandler handler;
+  private GetPaymentByIdQueryHandler handler;
 
   @BeforeEach
   void cleanUp() {
@@ -49,7 +49,7 @@ public class GetPaymentByIdHandlerTest {
 
     payment.setId(id);
 
-    final var expectedCommand = new GetPaymentByIdCommand(id.getValue());
+    final var expectedCommand = new GetPaymentByIdQuery(id.getValue());
 
     Mockito.when(repository.findById(Mockito.eq(expectedCommand.id())))
       .thenReturn(Optional.of(payment.clone()));
@@ -70,7 +70,7 @@ public class GetPaymentByIdHandlerTest {
   @Test
   public void givenAValidCommand_whenCallsDeletePayment_shouldNotFound() {
     final var id = PaymentID.unique();
-    final var expectedCommand = new GetPaymentByIdCommand(id.getValue());
+    final var expectedCommand = new GetPaymentByIdQuery(id.getValue());
 
     Mockito.when(this.repository.findById(Mockito.anyString()))
       .thenReturn(Optional.empty());

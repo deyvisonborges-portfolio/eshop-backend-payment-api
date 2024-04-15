@@ -1,4 +1,4 @@
-package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.create;
+package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.create;
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;

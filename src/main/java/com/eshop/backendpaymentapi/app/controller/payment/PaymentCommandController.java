@@ -1,7 +1,8 @@
 package com.eshop.backendpaymentapi.app.controller.payment;
 
-import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.create.CreatePaymentCommand;
-import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.create.CreatePaymentHandler;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.create.CreatePaymentCommand;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.create.CreatePaymentCommandHandler;
+import jdk.jfr.ContentType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(name = "billing/payment")
 public class PaymentCommandController {
-  private final CreatePaymentHandler createPaymentHandler;
+  private final CreatePaymentCommandHandler createPaymentCommandHandler;
 
-	public PaymentCommandController(CreatePaymentHandler createPaymentHandler) {
-		this.createPaymentHandler = createPaymentHandler;
+	public PaymentCommandController(CreatePaymentCommandHandler createPaymentCommandHandler) {
+		this.createPaymentCommandHandler = createPaymentCommandHandler;
 	}
 
 	public ResponseEntity<?> health() {
@@ -23,6 +24,6 @@ public class PaymentCommandController {
 
   @PostMapping
   public void create(@RequestBody CreatePaymentCommand command) {
-    this.createPaymentHandler.execute(command);
+    this.createPaymentCommandHandler.execute(command);
   }
 }

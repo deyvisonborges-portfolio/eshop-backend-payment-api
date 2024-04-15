@@ -1,4 +1,4 @@
-package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.create;
+package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.create;
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
@@ -6,17 +6,16 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.UseCaseContrac
 import com.eshop.backendpaymentapi.lib.exception.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
-public class CreatePaymentHandler extends UseCaseContract<CreatePaymentCommand, CreatePaymentOutput> {
-  private final Logger logger = LoggerFactory.getLogger(CreatePaymentHandler.class);
+public class CreatePaymentCommandHandler extends UseCaseContract<CreatePaymentCommand, CreatePaymentOutput> {
+  private final Logger logger = LoggerFactory.getLogger(CreatePaymentCommandHandler.class);
 	private final PaymentRepositoryContract repository;
 
-	public CreatePaymentHandler(PaymentRepositoryContract repository) {
+	public CreatePaymentCommandHandler(PaymentRepositoryContract repository) {
 		this.repository = Objects.requireNonNull(repository);
 	}
 

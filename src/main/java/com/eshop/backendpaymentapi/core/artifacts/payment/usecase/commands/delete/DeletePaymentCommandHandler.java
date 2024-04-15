@@ -1,4 +1,4 @@
-package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.delete;
+package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.delete;
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.UnitUseCase;
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class DeletePaymentHandler extends UnitUseCase<DeletePaymentCommand> {
+public class DeletePaymentCommandHandler extends UnitUseCase<DeletePaymentCommand> {
   private final PaymentRepositoryContract repository;
 
-	public DeletePaymentHandler(PaymentRepositoryContract repository) {
+	public DeletePaymentCommandHandler(PaymentRepositoryContract repository) {
 		this.repository = Objects.requireNonNull(repository);
 	}
 

@@ -7,8 +7,8 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
-import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.delete.DeletePaymentCommand;
-import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.delete.DeletePaymentHandler;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.delete.DeletePaymentCommand;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.delete.DeletePaymentCommandHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ public class DeletePaymentTest {
    * Instância da classe handler que será testada.
    */
   @InjectMocks
-  private DeletePaymentHandler handler;
+  private DeletePaymentCommandHandler handler;
 
   /**
    * Este método é executado antes de cada teste para redefinir o estado dos mocks.

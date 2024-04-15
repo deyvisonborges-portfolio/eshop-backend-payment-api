@@ -2,7 +2,9 @@ package com.eshop.backendpaymentapi.app.persistence.payment;
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentID;
+import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentSearchQuery;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
+import com.eshop.backendpaymentapi.lib.Pagination;
 import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,5 +73,10 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
       this.logger.info(MessageFormat.format("Error while fetching Payment with id: {0}", id), e);
       throw e;
     }
+  }
+
+  @Override
+  public Pagination<Payment> findAll(PaymentSearchQuery query) {
+    return null;
   }
 }
