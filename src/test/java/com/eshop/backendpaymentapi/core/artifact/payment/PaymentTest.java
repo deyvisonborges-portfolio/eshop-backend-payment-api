@@ -18,7 +18,6 @@ public class PaymentTest {
 
   @Test
   void validatePaymentCreationWithValidParameters() {
-    final PaymentID paymentId = PaymentID.unique();
     final double value = 100.00;
     final PaymentStatus status = PaymentStatus.PENDING;
     final PaymentMethod method = PaymentMethod.CREDIT_CARD;
@@ -41,11 +40,9 @@ public class PaymentTest {
   void validateIsEmptyFactory() {
     final var payment = Payment.emptyFactory();
     Assertions.assertEquals(0.0, payment.getValue());
-		Assertions.assertNull(payment.getPaidIn());
-		Assertions.assertNull(payment.getCustomerId());
-		Assertions.assertNull(payment.getMethod());
-		Assertions.assertNull(payment.getStatus());
-		Assertions.assertNull(payment.getOrderId());
+		Assertions.assertNotNull(payment.getMethod());
+		Assertions.assertNotNull(payment.getStatus());
+		Assertions.assertNotNull(payment.getOrderId());
   }
 
   @Test

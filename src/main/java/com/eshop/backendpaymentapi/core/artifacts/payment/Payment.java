@@ -5,6 +5,7 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus
 import com.eshop.backendpaymentapi.lib.domain.AggregateRoot;
 
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Payment extends AggregateRoot<PaymentID> {
@@ -24,12 +25,12 @@ public class Payment extends AggregateRoot<PaymentID> {
     final String customerId
   ) {
     super(PaymentID.unique(), true, Instant.now(), Instant.now());
-    this.value = value;
-    this.status = status;
-    this.method = method;
-    this.paidIn = paidIn;
-    this.orderId = orderId;
-    this.customerId = customerId;
+    this.value = Objects.requireNonNull(value);
+    this.status = Objects.requireNonNull(status);
+    this.method = Objects.requireNonNull(method);
+    this.paidIn = Objects.requireNonNull(paidIn);
+    this.orderId = Objects.requireNonNull(orderId);
+    this.customerId = Objects.requireNonNull(customerId);
   }
 
   public static Payment factory(
