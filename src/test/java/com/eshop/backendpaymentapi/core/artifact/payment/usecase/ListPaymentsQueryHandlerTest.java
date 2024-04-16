@@ -4,6 +4,7 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentSearchQuery;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.list.ListPaymentsQueryHandler;
+import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.list.ListPaymentsQueryOutput;
 import com.eshop.backendpaymentapi.lib.Pagination;
 import com.eshop.backendpaymentapi.lib.SearchDirection;
 import org.junit.jupiter.api.Assertions;
@@ -59,16 +60,16 @@ public class ListPaymentsQueryHandlerTest {
     );
 
     final var expectedItemsCount = 2;
-    final var expectedResult = exptectedPagination.map(ListPaymentOutput::from);
+    final var expectedResult = exptectedPagination.map(ListPaymentsQueryOutput::from);
 
     Mockito.when(this.repository.findAll(searchQuery))
       .thenReturn(exptectedPagination);
 
     final var actualResult = this.handler.execute(searchQuery);
 
-    Assertions.assertEquals(expectedItemsCount, actualResult.items.size());
-    Assertions.assertEquals(expectedResult, actualResult.items.size());
-    Assertions.assertEquals(expectedPage, actualResult.page());
+    Assertions.assertEquals(expectedItemsCount, actualResult.items().size());
+    Assertions.assertEquals(expectedResult, actualResult);
+    Assertions.assertEquals(expectedPage, actualResult.currentPage());
     Assertions.assertEquals(expectedPerPage, actualResult.perPage());
     Assertions.assertEquals(payments.size(), actualResult.total());
   }
