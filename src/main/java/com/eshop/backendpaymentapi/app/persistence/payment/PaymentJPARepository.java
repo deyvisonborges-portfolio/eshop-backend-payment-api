@@ -43,7 +43,7 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
   public void delete(String id) {
     try {
       this.findById(id);
-      this.repositoryContract.deleteById(PaymentID.from(UUID.fromString(id)));
+      this.repositoryContract.deleteById(id);
     } catch (Exception e) {
       this.logger.info(MessageFormat.format("Error while delete Payment with id: {0}", id), e);
       throw e;
@@ -53,7 +53,7 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
   @Override
   public Optional<Payment> findById(String id) {
     try {
-      final var paymentOpt = this.repositoryContract.findById(PaymentID.from(UUID.fromString(id)))
+      final var paymentOpt = this.repositoryContract.findById(id)
         .orElseThrow(
           () -> new NotFoundException(
             MessageFormat.format("Not found Payment with id: {0}", id)
