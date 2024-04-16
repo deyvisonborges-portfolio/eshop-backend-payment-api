@@ -24,9 +24,10 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
 	}
 
 	@Override
-  public void save(Payment payment) {
+  public Payment save(Payment payment) {
     try {
-      this.repositoryContract.save(PaymentJPAEntity.from(payment));
+      final var jpaPayment = this.repositoryContract.save(PaymentJPAEntity.from(payment));
+      return PaymentJPAEntity.toAggregate(jpaPayment);
     } catch (Exception e) {
       this.logger.info("Repository -> Error while saving payment", e);
       throw e;
@@ -58,17 +59,7 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
             MessageFormat.format("Not found Payment with id: {0}", id)
           )
         );
-
-      return Optional.of(
-        Payment.factory(
-          paymentOpt.getValue(),
-          paymentOpt.getStatus(),
-					paymentOpt.getMethod(),
-          paymentOpt.getPaidIn(),
-          paymentOpt.getOrderId(),
-          paymentOpt.getCustomerId()
-        )
-      );
+      return Optional.of(PaymentJPAEntity.toAggregate(paymentOpt));
     } catch (Exception e) {
       this.logger.info(MessageFormat.format("Error while fetching Payment with id: {0}", id), e);
       throw e;

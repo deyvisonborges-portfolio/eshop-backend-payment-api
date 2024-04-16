@@ -5,6 +5,7 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus
 import com.eshop.backendpaymentapi.lib.domain.AggregateRoot;
 
 import java.time.Instant;
+import java.util.UUID;
 
 public class Payment extends AggregateRoot<PaymentID> {
   private final double value;
@@ -49,14 +50,41 @@ public class Payment extends AggregateRoot<PaymentID> {
     );
   }
 
+  public static Payment factory(
+    final String id,
+    final boolean active,
+    final Instant createdAt,
+    final Instant updatedAt,
+    final double value,
+    final PaymentStatus status,
+    final PaymentMethod method,
+    final Instant paidIn,
+    final String orderId,
+    final String customerId
+  ) {
+    final var payment = new Payment(
+      value,
+      status,
+      method,
+      paidIn,
+      orderId,
+      customerId
+    );
+    payment.setId(PaymentID.from(UUID.fromString(id)));
+    payment.setActive(active);
+    payment.setCreatedAt(createdAt);
+    payment.setUpdatedAt(updatedAt);
+    return payment;
+  }
+
   public static Payment emptyFactory() {
     return new Payment(
       0.0,
-      null,
-      null,
-      null,
-      null,
-      null
+      PaymentStatus.OPEN,
+      PaymentMethod.DEBIT_CARD,
+      Instant.now(),
+      UUID.randomUUID().toString(),
+      UUID.randomUUID().toString()
     );
   }
 
@@ -101,5 +129,17 @@ public class Payment extends AggregateRoot<PaymentID> {
 
   public void setId(PaymentID id) {
     super.id = id;
+  }
+
+  public void setActive(boolean active) {
+    super.active = active;
+  }
+
+  public void setCreatedAt(final Instant createdAt) {
+    super.createdAt = createdAt;
+  }
+
+  public void setUpdatedAt(final Instant updatedAt) {
+    super.updatedAt = updatedAt;
   }
 }

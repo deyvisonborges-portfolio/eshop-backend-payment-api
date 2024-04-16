@@ -85,6 +85,21 @@ public class PaymentJPAEntity {
     );
   }
 
+  public static Payment toAggregate(final PaymentJPAEntity entity) {
+    return Payment.factory(
+      entity.getId(),
+      entity.getActive(),
+      entity.getCreatedAt(),
+      entity.getUpdatedAt(),
+      entity.getValue(),
+      entity.getStatus(),
+      entity.getMethod(),
+      entity.getPaidIn(),
+      entity.getOrderId(),
+      entity.getCustomerId()
+    );
+  }
+
   public String getId() {
     return id;
   }
