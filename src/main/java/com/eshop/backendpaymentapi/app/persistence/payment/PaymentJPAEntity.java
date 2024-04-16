@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "payments")
 public class PaymentJPAEntity {
   @Id
   @Column(nullable = false)
@@ -25,7 +25,7 @@ public class PaymentJPAEntity {
   @Column(name =  "updated_at")
   private Instant updatedAt;
 
-  @Column(nullable = false)
+  @Column(name = "price", nullable = false)
   private double value;
 
   @Column(nullable = false)

@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${postgres.host}:${postgres.port}/${postgres.database}
+    username: ${postgres.username}
+    password: ${postgres.password}
+    driver-class-name: org.postgresql.Driver
+#  flyway:
+#    url: jdbc:postgresql://${postgres.host}:${postgres.port}/${postgres.database}
+#    user: ${postgres.username}
+#    password: ${postgres.password}
+#    locations: sql

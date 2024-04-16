@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+postgres:
+  username: root
+  password: 123456
+  database: payments_db
+  host: localhost
+  port: 5440
+
