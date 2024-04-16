@@ -75,8 +75,70 @@ public class ListPaymentsQueryHandlerTest {
   }
 
   @Test
-  void givenAValidQuery_whenHasNoResults_thenShouldReturnEmptyPayments(){}
+  void givenAValidQuery_whenHasNoResults_thenShouldReturnEmptyPayments(){
+    final var payments =List.<Payment>of();
+
+    final var expectedPage = 0;
+    final var expectedPerPage = 10;
+    final var expectedTerms = "";
+    final var expectedSort = "createdAt";
+    final var expectedDirection = SearchDirection.ASCENDANT;
+
+    final var searchQuery = new PaymentSearchQuery(
+      expectedPage,
+      expectedPerPage,
+      expectedTerms,
+      expectedSort,
+      expectedDirection
+    );
+
+    final var exptectedPagination = new Pagination<>(
+      expectedPage,
+      expectedPerPage,
+      payments.size(),
+      payments
+    );
+
+    final var expectedItemsCount = 0;
+    final var expectedResult = exptectedPagination.map(ListPaymentsQueryOutput::from);
+
+    Mockito.when(this.repository.findAll(searchQuery))
+      .thenReturn(exptectedPagination);
+
+    final var actualResult = this.handler.execute(searchQuery);
+
+    Assertions.assertEquals(expectedItemsCount, actualResult.items().size());
+    Assertions.assertEquals(expectedResult, actualResult);
+    Assertions.assertEquals(expectedPage, actualResult.currentPage());
+    Assertions.assertEquals(expectedPerPage, actualResult.perPage());
+    Assertions.assertEquals(payments.size(), actualResult.total());
+  }
 
   @Test
-  void givenAValidQuery_whenGatewayThrowsException_shouldReturnException(){}
+  void givenAValidQuery_whenGatewayThrowsException_shouldReturnException(){
+    final var expectedPage = 0;
+    final var expectedPerPage = 10;
+    final var expectedTerms = "";
+    final var expectedSort = "createdAt";
+    final var expectedDirection = SearchDirection.ASCENDANT;
+    final var expectedErrorMessage = "";
+
+    final var searchQuery = new PaymentSearchQuery(
+      expectedPage,
+      expectedPerPage,
+      expectedTerms,
+      expectedSort,
+      expectedDirection
+    );
+
+    Mockito.when(this.repository.findAll(searchQuery))
+      .thenThrow(new IllegalStateException(expectedErrorMessage));
+
+    final var actualException = Assertions.assertThrows(
+      IllegalStateException.class,
+      () -> this.handler.execute(searchQuery)
+    );
+
+    Assertions.assertEquals(expectedErrorMessage, actualException.getMessage());
+  }
 }
