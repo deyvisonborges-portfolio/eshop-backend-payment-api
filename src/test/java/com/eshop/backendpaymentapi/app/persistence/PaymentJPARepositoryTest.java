@@ -1,7 +1,7 @@
 package com.eshop.backendpaymentapi.app.persistence;
 
 import com.eshop.backendpaymentapi.RepositoryAnnotation;
-import com.eshop.backendpaymentapi.app.persistence.payment.PaymentJPARepository;
+import com.eshop.backendpaymentapi.app.persistence.artifacts.payment.PaymentJPARepository;
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
@@ -41,13 +41,25 @@ public class PaymentJPARepositoryTest {
     final var payment = Payment.emptyFactory();
     final var paymentId = payment.getId().getValue();
 
-    final var actualPayment = this.jpaRepository.save(payment);
-    final var savedPayment = this.jpaRepository.findById(paymentId).get();
+    final var savedPayment = this.jpaRepository.save(payment);
+    final var findedPayment = this.jpaRepository.findById(paymentId).get();
 
-    Assertions.assertNotNull(savedPayment);
-    Assertions.assertEquals(actualPayment.getId(), savedPayment.getId());
+    Assertions.assertNotNull(findedPayment);
+    Assertions.assertEquals(savedPayment.getId(), findedPayment.getId());
 
     this.jpaRepository.delete(payment.getId().getValue());
     Assertions.assertThrows(NotFoundException.class, () -> this.jpaRepository.findById(paymentId));
+  }
+
+  @Test
+  void givenAPrePersistedPaymentAndValidPaymentId_whenTryToDeleteIt_shouldFindPaymentById() {
+    final var payment = Payment.emptyFactory();
+    final var paymentId = payment.getId().getValue();
+
+    final var savedPayment = this.jpaRepository.save(payment);
+    final var findedPayment = this.jpaRepository.findById(paymentId).get();
+
+    Assertions.assertNotNull(savedPayment);
+    Assertions.assertEquals(savedPayment.getId(), findedPayment.getId());
   }
 }

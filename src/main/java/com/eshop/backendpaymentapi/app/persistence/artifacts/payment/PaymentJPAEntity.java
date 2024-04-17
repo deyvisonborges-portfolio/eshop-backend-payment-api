@@ -1,4 +1,4 @@
-package com.eshop.backendpaymentapi.app.persistence.payment;
+package com.eshop.backendpaymentapi.app.persistence.artifacts.payment;
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;

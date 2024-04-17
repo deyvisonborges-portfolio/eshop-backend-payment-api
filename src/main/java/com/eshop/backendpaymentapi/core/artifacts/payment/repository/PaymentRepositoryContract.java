@@ -4,6 +4,7 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentSearchQuery;
 import com.eshop.backendpaymentapi.lib.Pagination;
 import com.eshop.backendpaymentapi.lib.domain.repository.BaseRepositoryContract;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 

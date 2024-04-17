@@ -1,18 +1,20 @@
-package com.eshop.backendpaymentapi.app.persistence.payment;
+package com.eshop.backendpaymentapi.app.persistence.artifacts.payment;
 
+import com.eshop.backendpaymentapi.app.persistence.utils.SpecificationUtils;
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
-import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentID;
 import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentSearchQuery;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.lib.Pagination;
 import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.text.MessageFormat;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public class PaymentJPARepository implements PaymentRepositoryContract {
@@ -67,7 +69,35 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
   }
 
   @Override
-  public Pagination<Payment> findAll(PaymentSearchQuery query) {
-    return null;
+  public Pagination<Payment> findAll(final PaymentSearchQuery query) {
+    /*
+    * Pagination
+    * */
+    final var page = PageRequest.of(
+      query.page(),
+      query.perPage(),
+      Sort.by(Sort.Direction.fromString(String.valueOf(query.direction())), query.sort())
+    );
+
+    /*
+    * Dynamic Query
+    * */
+    final var specifications = Optional.ofNullable(query.terms())
+      .filter(str -> str.isBlank())
+      .map(str ->
+        SpecificationUtils.<PaymentJPAEntity>like("value", str)
+          .or(SpecificationUtils.like("status", str))
+          .or(SpecificationUtils.like("method", str))
+      )
+      .orElseGet(null);
+
+    final var pageResult = this.repositoryContract.findAll(Specification.where(specifications), page);
+
+    return new Pagination<>(
+      pageResult.getNumber(),
+      pageResult.getSize(),
+      pageResult.getTotalElements(),
+      pageResult.map(PaymentJPAEntity::toAggregate).toList()
+    );
   }
 }
