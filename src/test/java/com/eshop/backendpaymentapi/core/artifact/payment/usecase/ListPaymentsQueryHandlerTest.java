@@ -1,7 +1,11 @@
 package com.eshop.backendpaymentapi.core.artifact.payment.usecase;
 
+import com.eshop.backendpaymentapi.app.persistence.artifacts.payment.PaymentJPARepository;
+import com.eshop.backendpaymentapi.app.persistence.artifacts.payment.PaymentJPARepositoryContract;
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentSearchQuery;
+import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
+import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.list.ListPaymentsQueryHandler;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.list.ListPaymentsQueryOutput;
@@ -16,15 +20,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Stream;
 
 @ExtendWith(MockitoExtension.class)
 public class ListPaymentsQueryHandlerTest {
-  @Mock
-  private PaymentRepositoryContract repository;
-
   @InjectMocks
   private ListPaymentsQueryHandler handler;
+
+  @Mock
+  private PaymentRepositoryContract repository;
 
   @BeforeEach
   void cleanUp() {
@@ -65,7 +72,7 @@ public class ListPaymentsQueryHandlerTest {
     Mockito.when(this.repository.findAll(searchQuery))
       .thenReturn(exptectedPagination);
 
-    final var actualResult = this.handler.execute(searchQuery);
+    final var actualResult = this.repository.findAll(searchQuery);
 
     Assertions.assertEquals(expectedItemsCount, actualResult.items().size());
     Assertions.assertEquals(expectedResult, actualResult);
@@ -140,5 +147,42 @@ public class ListPaymentsQueryHandlerTest {
     );
 
     Assertions.assertEquals(expectedErrorMessage, actualException.getMessage());
+  }
+
+  @Test
+  void givenPrePersistPayments_whenCallsFindAll_shouldReturnPaginated() {
+    final var id = UUID.randomUUID().toString();
+
+    final var expectedPage = 0;
+    final var expectedPerPage = 3;
+    final var expectedTotal = 3;
+
+    final var pix = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.PIX, Instant.now(), id, id);
+    final var credit = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.CREDIT_CARD, Instant.now(), id, id);
+    final var debit = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.DEBIT_CARD, Instant.now(), id, id);
+
+    Mockito.when(repository.findAll(Mockito.any())).thenReturn(
+      new Pagination<>(expectedPage, expectedPerPage, expectedTotal, List.of(pix, credit, debit))
+    );
+
+    final var query = new PaymentSearchQuery(expectedPage, expectedPerPage, "", "", SearchDirection.ASCENDANT);
+    final var actualResult = handler.execute(query);
+
+    Assertions.assertEquals(expectedPage, actualResult.currentPage());
+    Assertions.assertEquals(expectedPerPage, actualResult.perPage());
+    Assertions.assertEquals(expectedTotal, actualResult.total());
+    Assertions.assertEquals(expectedPerPage, actualResult.items().size());
+    Assertions.assertEquals(pix.getId(), actualResult.items().get(0).id());
+
+  }
+
+  @Test
+  void givenEmptyPaymentsTable_whenCallsFindAll_shouldReturnEmptyPage() {
+
+  }
+
+  @Test
+  void givenFollowPagination_whenCallsFindAllWithPage1_shouldReturnPaginated() {
+
   }
 }

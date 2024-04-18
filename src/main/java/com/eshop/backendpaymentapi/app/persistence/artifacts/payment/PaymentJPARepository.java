@@ -14,7 +14,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class PaymentJPARepository implements PaymentRepositoryContract {
@@ -69,6 +71,14 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
   }
 
   @Override
+  public void saveAll(List<Payment> payments) {
+    final var entities = payments.stream()
+      .map(PaymentJPAEntity::from)
+      .collect(Collectors.toList()); // Coletar as entidades mapeadas em uma lista
+    this.repositoryContract.saveAll(entities); // Salvar a lista de entidades
+  }
+
+  @Override
   public Pagination<Payment> findAll(final PaymentSearchQuery query) {
     /*
     * Pagination
@@ -99,5 +109,10 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
       pageResult.getTotalElements(),
       pageResult.map(PaymentJPAEntity::toAggregate).toList()
     );
+  }
+
+  @Override
+  public List<Payment> findAll() {
+    return this.repositoryContract.findAll().stream().map(PaymentJPAEntity::toAggregate).toList();
   }
 }
