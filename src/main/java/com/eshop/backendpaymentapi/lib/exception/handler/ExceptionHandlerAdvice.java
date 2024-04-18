@@ -38,4 +38,11 @@ public class ExceptionHandlerAdvice {
 				new ErrorResponseRecord(n.getMessage(), HttpStatus.BAD_GATEWAY, HttpStatus.BAD_GATEWAY.value())
 		);
 	}
+
+  @ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<ErrorResponseRecord> nullPointerException(NullPointerException n) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+				new ErrorResponseRecord(n.getMessage(), HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value())
+		);
+	}
 }
