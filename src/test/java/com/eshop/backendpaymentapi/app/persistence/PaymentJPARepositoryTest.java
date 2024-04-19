@@ -1,6 +1,6 @@
 package com.eshop.backendpaymentapi.app.persistence;
 
-import com.eshop.backendpaymentapi.RepositoryAnnotation;
+import com.eshop.backendpaymentapi.RepositoryTestAnnotation;
 import com.eshop.backendpaymentapi.app.persistence.artifacts.payment.PaymentJPARepository;
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@RepositoryAnnotation
+@RepositoryTestAnnotation
 public class PaymentJPARepositoryTest {
   @Autowired
   private PaymentJPARepository jpaRepository;

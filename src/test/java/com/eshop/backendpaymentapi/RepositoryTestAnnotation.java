@@ -19,12 +19,12 @@ import java.util.Collection;
 @ActiveProfiles("test")
 @DataJpaTest
 @ComponentScan(includeFilters = {
-  @ComponentScan.Filter(type = FilterType.REGEX,
-    pattern = ".*[Repository]")
+  @ComponentScan.Filter(type = FilterType.REGEX ,
+    pattern = ".[Repository]")
 })
-@ExtendWith(RepositoryAnnotation.CleanUpExtension.class)
+@ExtendWith(RepositoryTestAnnotation.CleanUpExtension.class)
 
-public @interface RepositoryAnnotation {
+public @interface RepositoryTestAnnotation {
   static class CleanUpExtension implements BeforeEachCallback {
     @Override
     public void beforeEach(ExtensionContext context) throws Exception {
