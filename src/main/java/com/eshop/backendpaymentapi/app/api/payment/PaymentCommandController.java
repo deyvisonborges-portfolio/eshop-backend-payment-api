@@ -20,7 +20,7 @@ public class PaymentCommandController implements PaymentCommandAPIContract {
   }
 
   @Override
-  public ResponseEntity<?> createPayment(CreatePaymentCommand command) {
+  public ResponseEntity<?> createPayment(final CreatePaymentCommand command) {
     this.createPaymentCommandHandler.execute(command);
     return ResponseEntity.status(HttpStatus.CREATED).body(null);
   }
