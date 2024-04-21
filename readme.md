@@ -1,6 +1,18 @@
 # Microserviço de Pagamentos
 
-Este é um microserviço dedicado ao gerenciamento de pagamentos para o seu e-commerce. Ele foi desenvolvido utilizando Java com o framework Spring, aproveitando tecnologias como Spring Data, Docker, PostgreSQL, Spring H2 e Spring RabbitMQ.
+> Esse projeto está sendo construindo enquanto estudo outras tecnologias. E mais, é um projeto no qual estou testando algumas formas diferentes de construir meus projetos.
+> Logo, eu sei cada conceito que apliquei aqui, estou apenas pensando um pouco fora da caixa e testando.
+> Afinal DDD, TDD, BBB (rsrs) e qualquer outra abordagem, NÃO SÃO BALAS DE PRATA!
+
+Este é um microserviço dedicado ao gerenciamento de pagamentos para o seu e-commerce.
+
+## Dúvidas
+- **Por que tu não usa módulos gradle**?
+  - Não vejo necessidade pra esse projeto.
+- **Por que não usa: domain, infraestructure, e afins?**
+  - Não curto essa divisão.
+- **E porque...**
+  - Como comentei acima, estou testando novas formas de codificar.
 
 ## Funcionalidades Principais
 
@@ -14,13 +26,71 @@ Este é um microserviço dedicado ao gerenciamento de pagamentos para o seu e-co
 
 - **Comunicação Assíncrona com RabbitMQ**: Utiliza o Spring RabbitMQ para comunicação assíncrona entre microserviços, garantindo uma arquitetura resiliente e escalável.
 
-## Pré-requisitos
+## Tópicos abordados nesse projeto
+- **Arquitetura**
+- **DDD**
+  - Entities
+  - Aggregates
+  - Value Objects (geralmente uso a nomeclatura 'primitives')
+  - Identifiers
+  - BaseRepositoryContract, InMemoryRepositoryContract, InMemoryRepository (implementação)
+  - Pagination Entity
+    - Search Direction Entity
+  - Artifacts
+    - **Contém toda a lógica genéria e purista de um conceito dentro do domímio (ou subdomínio)**
+      - https://socadk.github.io/design-practice-repository/artifact-templates/DPR-StrategicDDDContextMap.html
+      - https://www.ibm.com/docs/en/rsas/7.5.0?topic=overview-artifacts
+      - https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/lifecycle-management/7.0.1?topic=artifacts-
+  - Modules ou Bounded Contexts?
+    - https://www.isaqb.org/blog/ddd-confusion-bounded-subdomain-context-module-or-what/
+  - Domain Repository, Domain Repository Contract, App Repository, App Repository Contract
+  - Domain Exception
+- **TDD**
+  - Test First
+  - Arrange, Act, Assert (Given / When / Should)
+  - Unit Tests
+  - Integrated Tests
+  - e2e tests (_WIP_)
+- **Clean Architecture / Hexagonal (do meu jeito de fazer)**
+  - **Como estou usando CQRS (do meu jeito de fazer)**
+    - Command Handler (mesmo que usecase);
+    - Query Handler (mesmo que usecase)
+- **CQRS**
+  - Query Handlers
+  - Queries
+  - Command Handlers
+  - Commands
+- **API Docs**
+  - OpenAPI
+  - Swagger
+- **Testes**
+  - JUnit, Mockito
+  - WebMvcTest, JacksonTest, DataJpaTest
+  - Custom Annotations
+  - @MockMVC, @MockBean, @Mock, @InjectMock, @BeforEeach
+  - Serialização e Desserialização com Jackson e Object Mapper
 
-- Java JDK 8 ou superior
+## Tecnologias
+
+- Java
+- Spring Boot
+- Spring Profiles
+- Spring AMQP (_WIP_)
+- Spring Data JPA
+- Flyway / Migrations (_WIP_)
+- Gradle
 - Docker
-- PostgreSQL
-- RabbitMQ
-- Maven
+- Kubernetes (_WIP_)
+- Postgres
+- H2 Database
+- RabbitMQ (_WIP_)
+- JUnit, Mockito
+- Rest Template (_WIP_)
+- TestContainers (_WIP_)
+- CI / CD (_WIP_)
+- Keycloak  / Custom Identity Service (_WIP_)
+- ElasticStack, DataDog, OpenTelemetry (_WIP_)
+- Spring Cloud Gateway (_WIP_)
 
 ## Configuração
 
