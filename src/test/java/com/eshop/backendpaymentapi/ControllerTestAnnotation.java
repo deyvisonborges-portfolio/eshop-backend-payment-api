@@ -1,6 +1,6 @@
 package com.eshop.backendpaymentapi;
 
-import com.eshop.backendpaymentapi.app.configuration.ObjectMapperConfig;
+import com.eshop.backendpaymentapi.app.configuration.object_mapper.ObjectMapperConfig;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;
@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Inherited
 @ActiveProfiles("test")
 @WebMvcTest
-@Import(ObjectMapperConfig.class)
+//@Import(ObjectMapperConfig.class) TODO: resolve Object Mapper Configuration in App/Configuration
 public @interface ControllerTestAnnotation {
   @AliasFor(annotation = WebMvcTest.class, attribute = "controllers")
   Class<?>[] controllers() default {};

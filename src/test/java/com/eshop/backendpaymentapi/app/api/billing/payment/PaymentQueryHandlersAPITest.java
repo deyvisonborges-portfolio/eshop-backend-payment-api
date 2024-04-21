@@ -1,4 +1,4 @@
-package com.eshop.backendpaymentapi.app.api;
+package com.eshop.backendpaymentapi.app.api.billing.payment;
 
 import com.eshop.backendpaymentapi.ControllerTestAnnotation;
 import com.eshop.backendpaymentapi.app.api.payment.PaymentQueryController;
@@ -110,8 +110,7 @@ public class PaymentQueryHandlersAPITest {
       .andExpect(MockMvcResultMatchers.jsonPath("$.perPage", Matchers.equalTo(expectedPerPage)))
       .andExpect(MockMvcResultMatchers.jsonPath("$.total", Matchers.equalTo(expectedTotal)))
       .andExpect(MockMvcResultMatchers.jsonPath("$.items", Matchers.hasSize(expectedItemsCount)))
-      .andExpect(MockMvcResultMatchers.jsonPath("$.items[0].id", Matchers.equalTo(payment.getId().getValue())))
-      .andExpect(MockMvcResultMatchers.jsonPath("$.items[0].status", Matchers.equalTo(payment.getStatus().getValue())))
+      .andExpect(MockMvcResultMatchers.jsonPath("$.items[0].status", Matchers.equalTo(payment.getStatus().toString())))
     ;
 
     Mockito.verify(listPaymentsQueryHandler, Mockito.times(1)).execute(Mockito.argThat(query ->

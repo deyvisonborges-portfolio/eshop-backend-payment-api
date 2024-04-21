@@ -1,19 +1,15 @@
-package com.eshop.backendpaymentapi.app.api;
+package com.eshop.backendpaymentapi.app.api.billing.payment;
 
 import com.eshop.backendpaymentapi.ControllerTestAnnotation;
 import com.eshop.backendpaymentapi.app.api.payment.PaymentCommandController;
-import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentID;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.create.CreatePaymentCommand;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.create.CreatePaymentCommandHandler;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.delete.DeletePaymentCommandHandler;
-import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get.GetPaymentByIdOutput;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
