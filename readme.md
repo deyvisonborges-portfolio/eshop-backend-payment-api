@@ -103,13 +103,13 @@ Este é um microserviço dedicado ao gerenciamento de pagamentos para o seu e-co
 4. Compile o projeto utilizando o Maven:
 
 ```bash
-mvn clean install
+gradle
 ```
 
-5. Execute o container Docker:
+5. Suba os containers:
 
 ```bash
-docker-compose up --build
+docker compose up -d
 ```
 
 Isso iniciará o microserviço de pagamentos juntamente com o banco de dados PostgreSQL e o serviço RabbitMQ.
