@@ -7,7 +7,7 @@ import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
 import java.text.MessageFormat;
 import java.util.Objects;
 
-public class GetPaymentByIdQueryHandler extends UseCaseContract<GetPaymentByIdQuery, GetPaymentByIdOutput> {
+public class GetPaymentByIdQueryHandler extends UseCaseContract<String, GetPaymentByIdOutput> {
   private final PaymentRepositoryContract repository;
 
 	public GetPaymentByIdQueryHandler(PaymentRepositoryContract repository) {
@@ -15,8 +15,8 @@ public class GetPaymentByIdQueryHandler extends UseCaseContract<GetPaymentByIdQu
 	}
 
 	@Override
-  public GetPaymentByIdOutput execute(GetPaymentByIdQuery input) {
-    final var paymentId = input.id();
+  public GetPaymentByIdOutput execute(final String id) {
+    final var paymentId = id;
     return this.repository.findById(paymentId)
       .map(GetPaymentByIdOutput::from)
       .orElseThrow(() -> new NotFoundException(

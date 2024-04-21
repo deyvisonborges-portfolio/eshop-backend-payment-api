@@ -5,7 +5,6 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentID;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
-import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get.GetPaymentByIdQuery;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get.GetPaymentByIdQueryHandler;
 import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
 import org.junit.jupiter.api.Assertions;
@@ -49,12 +48,12 @@ public class GetPaymentByIdQueryHandlerTest {
 
     payment.setId(id);
 
-    final var expectedCommand = new GetPaymentByIdQuery(id.getValue());
+    final var expectedQueryId = id.getValue();
 
-    Mockito.when(repository.findById(Mockito.eq(expectedCommand.id())))
+    Mockito.when(repository.findById(Mockito.eq(expectedQueryId)))
       .thenReturn(Optional.of(payment.clone()));
 
-    final var output = this.handler.execute(expectedCommand);
+    final var output = this.handler.execute(expectedQueryId);
 
     Assertions.assertEquals(output.value(), payment.getValue());
     Assertions.assertEquals(output.status(), payment.getStatus());
@@ -63,22 +62,22 @@ public class GetPaymentByIdQueryHandlerTest {
     Assertions.assertEquals(output.orderId(), payment.getOrderId());
     Assertions.assertEquals(output.customerId(), payment.getCustomerId());
 
-    Assertions.assertDoesNotThrow(() -> this.handler.execute(expectedCommand));
-    Mockito.verify(repository, Mockito.times(2)).findById(expectedCommand.id());
+    Assertions.assertDoesNotThrow(() -> this.handler.execute(expectedQueryId));
+    Mockito.verify(repository, Mockito.times(2)).findById(expectedQueryId);
   }
 
   @Test
   public void givenAValidCommand_whenCallsDeletePayment_shouldNotFound() {
     final var id = PaymentID.unique();
-    final var expectedCommand = new GetPaymentByIdQuery(id.getValue());
+    final var expectedQueryId = id.getValue();
 
     Mockito.when(this.repository.findById(Mockito.anyString()))
       .thenReturn(Optional.empty());
 
-    final var expectedExceptionMessage = MessageFormat.format("Not found Payment with id: {0}", expectedCommand.id());
+    final var expectedExceptionMessage = MessageFormat.format("Not found Payment with id: {0}", expectedQueryId);
     final var actualException = Assertions.assertThrows(
       NotFoundException.class,
-      () -> this.handler.execute(expectedCommand)
+      () -> this.handler.execute(expectedQueryId)
     );
 
     Assertions.assertEquals(expectedExceptionMessage, actualException.getMessage());

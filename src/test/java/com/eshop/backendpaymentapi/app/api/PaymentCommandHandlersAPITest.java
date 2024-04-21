@@ -19,7 +19,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @ControllerTestAnnotation(controllers = PaymentCommandController.class)
-public class PaymentAPITest {
+public class PaymentCommandHandlersAPITest {
 
   @Autowired
   private MockMvc mvc;
@@ -42,7 +42,7 @@ public class PaymentAPITest {
       id
     );
 
-    final var request = MockMvcRequestBuilders.post("/billing/payment")
+    final var request = MockMvcRequestBuilders.post("/payments")
       .contentType(MediaType.APPLICATION_JSON)
       .content(this.mapper.writeValueAsString(command));
 
