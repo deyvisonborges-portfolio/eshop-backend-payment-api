@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class DeletePaymentCommandHandler extends UnitUseCase<DeletePaymentCommand> {
+public class DeletePaymentCommandHandler extends UnitUseCase<String> {
   private final PaymentRepositoryContract repository;
 
 	public DeletePaymentCommandHandler(PaymentRepositoryContract repository) {
@@ -15,7 +15,7 @@ public class DeletePaymentCommandHandler extends UnitUseCase<DeletePaymentComman
 	}
 
   @Override
-  public void execute(final DeletePaymentCommand command) {
-    this.repository.delete(command.id());
+  public void execute(final String id) {
+    this.repository.delete(id);
   }
 }

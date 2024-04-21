@@ -54,22 +54,22 @@ public class DeletePaymentTest {
     final var id = UUID.randomUUID().toString();
     final var payment = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.DEBIT_CARD, Instant.now(), id, id);
 
-    final var expectedCommand = new DeletePaymentCommand(payment.getId().toString());
+    final var expectedId = payment.getId().toString();
 
     /*
      * Configura o comportamento do mock repository para esperar a chamada do método delete
      * */
     Mockito.doNothing().when(repository).delete(
       Mockito.eq(
-        expectedCommand.id()
+        expectedId
       )
     );
 
-    Assertions.assertDoesNotThrow(() -> this.handler.execute(expectedCommand));
+    Assertions.assertDoesNotThrow(() -> this.handler.execute(expectedId));
 
     /*
      * Verifica se o método delete foi chamado exatamente uma vez
      * */
-    Mockito.verify(repository, Mockito.times(1)).delete(expectedCommand.id());
+    Mockito.verify(repository, Mockito.times(1)).delete(expectedId);
   }
 }

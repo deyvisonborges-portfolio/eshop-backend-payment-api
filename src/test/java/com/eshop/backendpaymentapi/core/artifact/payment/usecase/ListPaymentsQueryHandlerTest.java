@@ -1,7 +1,5 @@
 package com.eshop.backendpaymentapi.core.artifact.payment.usecase;
 
-import com.eshop.backendpaymentapi.app.persistence.artifacts.payment.PaymentJPARepository;
-import com.eshop.backendpaymentapi.app.persistence.artifacts.payment.PaymentJPARepositoryContract;
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentSearchQuery;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
@@ -23,7 +21,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 @ExtendWith(MockitoExtension.class)
 public class ListPaymentsQueryHandlerTest {

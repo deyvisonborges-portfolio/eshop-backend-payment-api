@@ -34,7 +34,7 @@ public class PaymentQueryHandlersAPITest {
   private GetPaymentByIdQueryHandler getPaymentByIdQueryHandler;
 
   @Test
-  public void givenAValidCommand_whenCallsDeletePayment_shouldBeOk() throws Exception {
+  public void givenAValidCommand_whenCallsGetPaymentById_shouldReturnPayment() throws Exception {
     final var id = PaymentID.unique();
     final var payment = new Payment(
       0.0,
