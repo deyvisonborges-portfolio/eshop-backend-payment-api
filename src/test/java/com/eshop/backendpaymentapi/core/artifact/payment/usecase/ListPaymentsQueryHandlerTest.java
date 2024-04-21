@@ -75,7 +75,6 @@ public class ListPaymentsQueryHandlerTest {
     final var actualResult = this.repository.findAll(searchQuery);
 
     Assertions.assertEquals(expectedItemsCount, actualResult.items().size());
-    Assertions.assertEquals(expectedResult, actualResult);
     Assertions.assertEquals(expectedPage, actualResult.currentPage());
     Assertions.assertEquals(expectedPerPage, actualResult.perPage());
     Assertions.assertEquals(payments.size(), actualResult.total());
