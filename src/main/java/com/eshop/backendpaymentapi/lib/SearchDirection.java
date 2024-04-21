@@ -11,6 +11,8 @@ public enum SearchDirection {
           return ASCENDANT;
         case "descendant":
           return DESCENDANT;
+        default:
+          throw new IllegalArgumentException("Invalid search direction: " + direction);
       }
     }
     throw new IllegalArgumentException("Invalid search direction: " + direction);
