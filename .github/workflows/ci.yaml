@@ -1,4 +1,4 @@
-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+name: Java CI with Gradle
 
 on:
   push:
