@@ -8,7 +8,7 @@ import org.springframework.core.env.AbstractEnvironment;
 public class BackendPaymentApiApplication {
 
 	public static void main(String[] args) {
-    System.setProperty(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "test");
+    System.setProperty(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "dev");
 		SpringApplication.run(BackendPaymentApiApplication.class, args);
 	}
 }

@@ -3,10 +3,12 @@ package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.retrieve.get;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.UseCaseContract;
 import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.Objects;
 
+@Service
 public class GetPaymentByIdQueryHandler extends UseCaseContract<String, GetPaymentByIdOutput> {
   private final PaymentRepositoryContract repository;
 

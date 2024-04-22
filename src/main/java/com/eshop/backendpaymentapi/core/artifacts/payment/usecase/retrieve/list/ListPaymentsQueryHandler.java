@@ -4,9 +4,11 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentSearchQuery;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.UseCaseContract;
 import com.eshop.backendpaymentapi.lib.Pagination;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class ListPaymentsQueryHandler
   extends UseCaseContract<PaymentSearchQuery, Pagination<ListPaymentsQueryOutput>> {
   private final PaymentRepositoryContract repository;
