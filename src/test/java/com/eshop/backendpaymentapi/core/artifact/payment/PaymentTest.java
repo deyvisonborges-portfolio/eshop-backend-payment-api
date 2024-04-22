@@ -1,7 +1,6 @@
 package com.eshop.backendpaymentapi.core.artifact.payment;
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
-import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentID;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 import org.junit.jupiter.api.Assertions;

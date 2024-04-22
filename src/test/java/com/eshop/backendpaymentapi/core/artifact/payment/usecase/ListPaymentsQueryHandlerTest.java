@@ -64,7 +64,6 @@ public class ListPaymentsQueryHandlerTest {
     );
 
     final var expectedItemsCount = 2;
-    final var expectedResult = exptectedPagination.map(ListPaymentsQueryOutput::from);
 
     Mockito.when(this.repository.findAll(searchQuery))
       .thenReturn(exptectedPagination);

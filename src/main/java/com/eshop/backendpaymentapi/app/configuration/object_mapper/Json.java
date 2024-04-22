@@ -2,8 +2,8 @@ package com.eshop.backendpaymentapi.app.configuration.object_mapper;
 
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+// import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+// import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 //import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 

@@ -2,7 +2,6 @@ package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.dele
 
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.core.artifacts.payment.usecase.UnitUseCase;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
