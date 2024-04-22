@@ -19,7 +19,7 @@ import java.util.Collection;
 @ActiveProfiles("test")
 @DataJpaTest
 @ComponentScan(includeFilters = {
-    @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".[Repository]")
+  @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*[Repository]")
 })
 @ExtendWith(RepositoryTestAnnotation.CleanUpExtension.class)
 
