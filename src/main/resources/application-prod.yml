@@ -1,15 +1,15 @@
-spring:
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    open-in-view: false
-    show-sql: false
-    hibernate:
-      ddl-auto: none
+# spring:
+#   jpa:
+#     properties:
+#       hibernate:
+#         dialect: org.hibernate.dialect.PostgreSQLDialect
+#     open-in-view: false
+#     show-sql: false
+#     hibernate:
+#       ddl-auto: none
 
-postgres:
+datasource:
   url: ${DATABASE_POSTGRES_URL}
   username: ${DATABASE_POSTGRES_USERNAME}
   password: ${DATABASE_POSTGRES_PASSWORD}
-  database: ${DATABASE_POSTGRES_NAME}
+  driver-class-name: org.postgresql.Driver

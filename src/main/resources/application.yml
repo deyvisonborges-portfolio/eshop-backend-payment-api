@@ -1,7 +1,26 @@
 server:
   port: 8080
 
+springdoc:
+  api-docs:
+    path: /docs
+  swagger-ui:
+    tryItOutEnabled: true
+    path: /docs
+    operationsSorter: method
+    tagsSorter: alpha
+    filter: true
+
 spring:
+  flyway:
+    enabled: true
+    locations: filesystem:src/main/resources/db/migration
+    validate-on-migrate: true
+    baseline-description: true
+    baseline-on-migrate: true
+    create-schemas: true
+    default-schema: public
+    schemas: public
   jpa:
     properties:
       hibernate:
@@ -15,8 +34,7 @@ spring:
     username: ${postgres.username}
     password: ${postgres.password}
     driver-class-name: org.postgresql.Driver
-#  flyway:
-#    url: jdbc:postgresql://${postgres.host}:${postgres.port}/${postgres.database}
-#    user: ${postgres.username}
-#    password: ${postgres.password}
-#    locations: sql
+
+openapi:
+  dev-url: http://localhost:8080
+  prod-url: http://localhost:8080

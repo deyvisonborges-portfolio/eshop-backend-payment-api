@@ -19,8 +19,7 @@ import java.util.Collection;
 @ActiveProfiles("test")
 @DataJpaTest
 @ComponentScan(includeFilters = {
-  @ComponentScan.Filter(type = FilterType.REGEX ,
-    pattern = ".[Repository]")
+    @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".[Repository]")
 })
 @ExtendWith(RepositoryTestAnnotation.CleanUpExtension.class)
 
@@ -29,12 +28,12 @@ public @interface RepositoryTestAnnotation {
     @Override
     public void beforeEach(ExtensionContext context) throws Exception {
       final var repositories = SpringExtension.getApplicationContext(context)
-        .getBeansOfType(CrudRepository.class)
-        .values();
+          .getBeansOfType(CrudRepository.class)
+          .values();
       this.cleanUp(repositories);
     }
 
-    private void cleanUp(final Collection<CrudRepository> repositories) {
+    private void cleanUp(@SuppressWarnings("rawtypes") final Collection<CrudRepository> repositories) {
       repositories.forEach(CrudRepository::deleteAll);
     }
   }

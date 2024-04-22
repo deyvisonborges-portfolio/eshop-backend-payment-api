@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: "postgres:15.0-alpine"
+    environment:
+      - "POSTGRES_DB=payments_db"
+      - "POSTGRES_USER=root"
+      - "POSTGRES_PASSWORD=123456"
+    ports:
+      - "5440:5432"
+    networks:
+      - eshop-payment-api-network
+
+  rabbitmq:
+    image: "rabbitmq:latest"
+    environment:
+      - "RABBITMQ_DEFAULT_USER=root"
+      - "RABBITMQ_DEFAULT_PASS=123456"
+    ports:
+      - "5680:5672"
+    networks:
+      - eshop-payment-api-network
+
+networks:
+  eshop-payment-api-network:
+    name: eshop-payment-api-network
