@@ -1,8 +1,7 @@
 package com.eshop.backendpaymentapi;
 
-import com.eshop.backendpaymentapi.app.configuration.object_mapper.ObjectMapperConfig;
+//import com.eshop.backendpaymentapi.app.configuration.object_mapper.ObjectMapperConfig;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.test.context.ActiveProfiles;
 

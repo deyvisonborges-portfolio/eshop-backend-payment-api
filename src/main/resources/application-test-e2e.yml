@@ -1,0 +1,6 @@
+postgres:
+  username: root
+  password: 123456
+  database: payments_db
+  url: jdbc:postgresql://${postgres.host}:${postgres.port}/${postgres.database}
+
