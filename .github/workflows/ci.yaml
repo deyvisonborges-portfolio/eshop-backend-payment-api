@@ -12,6 +12,10 @@ on:
       - 'feature/**'
       - 'bugfix/**'
 
+env:
+  IMAGE_NAME: ${{ github.repository }}
+  JAR_FILE: application.jar
+
 jobs:
   tests:
     name: Tests Runner
@@ -30,7 +34,7 @@ jobs:
         run: ./gradlew test
 
   build:
-    name: Build application
+    name: Build Runner
     needs: tests
     runs-on: ubuntu-latest
     steps:
@@ -53,12 +57,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set env
-        run: echo "DATE=$(date +%s)" >> $GITHUB_ENV
+      - uses: docker/metadata-action@v4
+        id: meta
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: type=sha
 
-      - name: Build and push image
-        uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.DATE }}
+          tags: ${{ steps.meta.outputs.tags }}
+          build-args: |
+            JAR_FILE=${{ env.JAR_FILE }}
