@@ -52,10 +52,7 @@ jobs:
         run: ./gradlew clean build -x test
 
       - name: Build and push Docker image
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           docker build -t ${{ github.repository }}:${{ github.sha }} .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME}} -p ${{ secrets.DOCKERHUB_TOKEN}}
           docker push ${{ github.repository }}:${{ github.sha }}
