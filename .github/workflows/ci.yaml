@@ -56,6 +56,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          docker build -t $DOCKER_USERNAME/${{ github.repository }}:${{ github.sha }} .
+          docker build -t ${{ github.repository.name }}:${{ github.sha }} .
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push $DOCKER_USERNAME/${{ github.repository }}:${{ github.sha }}
+          docker push ${{ github.repository }}:${{ github.sha }}
