@@ -20,6 +20,18 @@ services:
     networks:
       - eshop-payment-api-network
 
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - 8443:8080
+    command:
+      - start-dev
+    networks:
+      - eshop-payment-api-network
+
 networks:
   eshop-payment-api-network:
     name: eshop-payment-api-network
