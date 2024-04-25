@@ -3,6 +3,7 @@ package com.eshop.backendpaymentapi.app.persistence.artifacts.payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -29,13 +30,10 @@ public class PaymentJPAEntity {
   private double value;
 
   @Column(nullable = false)
-  private PaymentStatus status;
+  private String status;
 
   @Column(nullable = false)
-  private PaymentMethod method;
-
-  @Column(nullable = false)
-  private Instant paidIn;
+  private String method;
 
   @Column(nullable = false, name = "order_id")
   private String orderId;
@@ -52,9 +50,8 @@ public class PaymentJPAEntity {
     final Instant createdAt,
     final Instant updatedAt,
     final double value,
-    final PaymentStatus status,
-    final PaymentMethod method,
-    final Instant paidIn,
+    final String status,
+    final String method,
     final String orderId,
     final String customerId
   ) {
@@ -65,7 +62,6 @@ public class PaymentJPAEntity {
     this.value = value;
     this.status = status;
     this.method = method;
-    this.paidIn = paidIn;
     this.orderId = orderId;
     this.customerId = customerId;
   }
@@ -77,9 +73,8 @@ public class PaymentJPAEntity {
       payment.getCreatedAt(),
       payment.getUpdatedAt(),
       payment.getValue(),
-      payment.getStatus(),
-      payment.getMethod(),
-      payment.getPaidIn(),
+      payment.getStatus().getValue().toString(),
+      payment.getMethod().getValue().toString(),
       payment.getOrderId(),
       payment.getCustomerId()
     );
@@ -92,9 +87,8 @@ public class PaymentJPAEntity {
       entity.getCreatedAt(),
       entity.getUpdatedAt(),
       entity.getValue(),
-      entity.getStatus(),
-      entity.getMethod(),
-      entity.getPaidIn(),
+      PaymentStatus.fromString(entity.getStatus()),
+      PaymentMethod.fromString(entity.getMethod()),
       entity.getOrderId(),
       entity.getCustomerId()
     );
@@ -140,28 +134,20 @@ public class PaymentJPAEntity {
     this.value = value;
   }
 
-  public PaymentStatus getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(PaymentStatus status) {
+  public void setStatus(String status) {
     this.status = status;
   }
 
-  public PaymentMethod getMethod() {
+  public String getMethod() {
     return method;
   }
 
-  public void setMethod(PaymentMethod method) {
+  public void setMethod(String method) {
     this.method = method;
-  }
-
-  public Instant getPaidIn() {
-    return paidIn;
-  }
-
-  public void setPaidIn(Instant paidIn) {
-    this.paidIn = paidIn;
   }
 
   public String getOrderId() {

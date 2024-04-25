@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.Instant;
 import java.util.UUID;
 
 @ControllerTestAnnotation(controllers = PaymentCommandController.class)
@@ -44,7 +43,6 @@ public class PaymentCommandHandlersAPITest {
       0.0,
       PaymentStatus.OPEN,
       PaymentMethod.DEBIT_CARD,
-      Instant.now(),
       id,
       id
     );

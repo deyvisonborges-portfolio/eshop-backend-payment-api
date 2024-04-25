@@ -17,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -51,7 +50,7 @@ public class DeletePaymentTest {
   @Test
   public void givenAValidCommand_whenCallsDeletePayment_shouldBeOk() {
     final var id = UUID.randomUUID().toString();
-    final var payment = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.DEBIT_CARD, Instant.now(), id, id);
+    final var payment = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.DEBIT_CARD, id, id);
 
     final var expectedId = payment.getId().toString();
 

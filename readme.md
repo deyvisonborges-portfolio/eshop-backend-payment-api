@@ -77,7 +77,7 @@ Este é um microserviço dedicado ao gerenciamento de pagamentos para o seu e-co
 - Spring Profiles
 - Spring AMQP (_WIP_)
 - Spring Data JPA
-- Flyway / Migrations (_WIP_)
+- Flyway / Migrations
 - Gradle
 - Docker
 - Kubernetes (_WIP_)
@@ -87,7 +87,7 @@ Este é um microserviço dedicado ao gerenciamento de pagamentos para o seu e-co
 - JUnit, Mockito
 - Rest Template (_WIP_)
 - TestContainers (_WIP_)
-- CI / CD (_WIP_)
+- CI / CD (Github Actions, Docker Hub)
 - Keycloak  / Custom Identity Service (_WIP_)
 - ElasticStack, DataDog, OpenTelemetry (_WIP_)
 - Spring Cloud Gateway (_WIP_)

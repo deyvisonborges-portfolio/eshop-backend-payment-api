@@ -1,1 +1,0 @@
-CREATE TABLE IF NOT EXISTS payments_db (id BIT PRIMARY KEY);

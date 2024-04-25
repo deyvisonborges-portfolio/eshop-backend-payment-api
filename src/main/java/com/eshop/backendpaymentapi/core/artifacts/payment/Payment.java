@@ -12,7 +12,6 @@ public class Payment extends AggregateRoot<PaymentID> {
   private final double value;
   private final PaymentStatus status;
   private final PaymentMethod method;
-  private final Instant paidIn;
   private final String orderId;
   private final String customerId;
 
@@ -20,7 +19,6 @@ public class Payment extends AggregateRoot<PaymentID> {
     final double value,
     final PaymentStatus status,
     final PaymentMethod method,
-    final Instant paidIn,
     final String orderId,
     final String customerId
   ) {
@@ -28,7 +26,6 @@ public class Payment extends AggregateRoot<PaymentID> {
     this.value = Objects.requireNonNull(value);
     this.status = Objects.requireNonNull(status);
     this.method = Objects.requireNonNull(method);
-    this.paidIn = Objects.requireNonNull(paidIn);
     this.orderId = Objects.requireNonNull(orderId);
     this.customerId = Objects.requireNonNull(customerId);
   }
@@ -37,7 +34,6 @@ public class Payment extends AggregateRoot<PaymentID> {
     final double value,
     final PaymentStatus status,
     final PaymentMethod method,
-    final Instant paidIn,
     final String orderId,
     final String customerId
   ) {
@@ -45,7 +41,6 @@ public class Payment extends AggregateRoot<PaymentID> {
       value,
       status,
       method,
-      paidIn,
       orderId,
       customerId
     );
@@ -59,7 +54,6 @@ public class Payment extends AggregateRoot<PaymentID> {
     final double value,
     final PaymentStatus status,
     final PaymentMethod method,
-    final Instant paidIn,
     final String orderId,
     final String customerId
   ) {
@@ -67,7 +61,6 @@ public class Payment extends AggregateRoot<PaymentID> {
       value,
       status,
       method,
-      paidIn,
       orderId,
       customerId
     );
@@ -83,7 +76,6 @@ public class Payment extends AggregateRoot<PaymentID> {
       0.0,
       PaymentStatus.OPEN,
       PaymentMethod.DEBIT_CARD,
-      Instant.now(),
       UUID.randomUUID().toString(),
       UUID.randomUUID().toString()
     );
@@ -94,7 +86,6 @@ public class Payment extends AggregateRoot<PaymentID> {
       this.value,
       this.status,
       this.method,
-      this.paidIn,
       this.orderId,
       this.customerId
     );
@@ -114,10 +105,6 @@ public class Payment extends AggregateRoot<PaymentID> {
 
   public PaymentMethod getMethod() {
     return method;
-  }
-
-  public Instant getPaidIn() {
-    return paidIn;
   }
 
   public String getOrderId() {

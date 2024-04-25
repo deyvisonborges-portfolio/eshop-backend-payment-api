@@ -24,7 +24,7 @@ public interface PaymentCommandAPIContract {
     consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE
   )
-  ResponseEntity<?>createPayment(@RequestBody final CreatePaymentCommand command);
+  ResponseEntity<?>createPayment(@RequestBody CreatePaymentCommand command);
 
   @Operation(summary = "Delete a payment by it's identifier")
   @ApiResponses(value = {

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.time.Instant;
 import java.util.UUID;
 
 public class CreatePaymentTest {
@@ -20,7 +19,6 @@ public class CreatePaymentTest {
       0.0,
       PaymentStatus.OPEN,
       PaymentMethod.DEBIT_CARD,
-      Instant.now(),
       id,
       id
     );

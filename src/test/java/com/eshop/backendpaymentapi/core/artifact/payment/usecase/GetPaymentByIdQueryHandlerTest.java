@@ -41,7 +41,6 @@ public class GetPaymentByIdQueryHandlerTest {
       0.0,
       PaymentStatus.OPEN,
       PaymentMethod.DEBIT_CARD,
-      Instant.now(),
       id.getValue(),
       id.getValue()
     );
@@ -58,7 +57,6 @@ public class GetPaymentByIdQueryHandlerTest {
     Assertions.assertEquals(output.value(), payment.getValue());
     Assertions.assertEquals(output.status(), payment.getStatus());
     Assertions.assertEquals(output.method(), payment.getMethod());
-    Assertions.assertEquals(output.paidIn(), payment.getPaidIn());
     Assertions.assertEquals(output.orderId(), payment.getOrderId());
     Assertions.assertEquals(output.customerId(), payment.getCustomerId());
 

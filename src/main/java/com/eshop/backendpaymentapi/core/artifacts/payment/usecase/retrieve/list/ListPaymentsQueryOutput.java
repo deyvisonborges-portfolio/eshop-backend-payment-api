@@ -15,7 +15,6 @@ public record ListPaymentsQueryOutput(
   double value,
   PaymentStatus status,
   PaymentMethod method,
-  Instant paidIn,
   String orderId,
   String customerId
 ) {
@@ -27,7 +26,6 @@ public record ListPaymentsQueryOutput(
       payment.getValue(),
       payment.getStatus(),
       payment.getMethod(),
-      payment.getPaidIn(),
       payment.getOrderId(),
       payment.getCustomerId()
     );

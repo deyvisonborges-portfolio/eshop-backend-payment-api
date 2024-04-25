@@ -14,7 +14,6 @@ public record GetPaymentByIdOutput(
   double value,
   PaymentStatus status,
   PaymentMethod method,
-  Instant paidIn,
   String orderId,
   String customerId
 ) {
@@ -27,7 +26,6 @@ public record GetPaymentByIdOutput(
       payment.getValue(),
       payment.getStatus(),
       payment.getMethod(),
-      payment.getPaidIn(),
       payment.getOrderId(),
       payment.getCustomerId()
     );

@@ -152,9 +152,9 @@ public class ListPaymentsQueryHandlerTest {
     final var expectedPerPage = 3;
     final var expectedTotal = 3;
 
-    final var pix = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.PIX, Instant.now(), id, id);
-    final var credit = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.CREDIT_CARD, Instant.now(), id, id);
-    final var debit = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.DEBIT_CARD, Instant.now(), id, id);
+    final var pix = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.PIX, id, id);
+    final var credit = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.CREDIT_CARD, id, id);
+    final var debit = Payment.factory(10.00, PaymentStatus.OPEN, PaymentMethod.DEBIT_CARD, id, id);
 
     Mockito.when(repository.findAll(Mockito.any())).thenReturn(
       new Pagination<>(expectedPage, expectedPerPage, expectedTotal, List.of(pix, credit, debit))

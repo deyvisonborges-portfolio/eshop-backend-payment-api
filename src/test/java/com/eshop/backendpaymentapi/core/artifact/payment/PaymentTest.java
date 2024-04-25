@@ -6,8 +6,6 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
-
 public class PaymentTest {
   @Test
   void validateEntityInitialization() {
@@ -20,17 +18,15 @@ public class PaymentTest {
     final double value = 100.00;
     final PaymentStatus status = PaymentStatus.PENDING;
     final PaymentMethod method = PaymentMethod.CREDIT_CARD;
-    final Instant paidIn = Instant.now();
     final String orderId = "123456";
     final String customerId = "789";
 
-    final var payment = new Payment(value, status, method, paidIn, orderId, customerId);
+    final var payment = new Payment(value, status, method, orderId, customerId);
 
     Assertions.assertNotNull(payment);
     Assertions.assertEquals(value, payment.getValue());
     Assertions.assertEquals(status, payment.getStatus());
     Assertions.assertEquals(method, payment.getMethod());
-    Assertions.assertEquals(paidIn, payment.getPaidIn());
     Assertions.assertEquals(orderId, payment.getOrderId());
     Assertions.assertEquals(customerId, payment.getCustomerId());
   }
@@ -46,8 +42,8 @@ public class PaymentTest {
 
   @Test
   void validateUniqueIdGeneratedByFactory() {
-    final var payment1 = Payment.factory(100.00, PaymentStatus.PENDING, PaymentMethod.CREDIT_CARD, Instant.now(), "123", "456");
-    final var payment2 = Payment.factory(200.00, PaymentStatus.PENDING, PaymentMethod.CREDIT_CARD, Instant.now(), "789", "101");
+    final var payment1 = Payment.factory(100.00, PaymentStatus.PENDING, PaymentMethod.CREDIT_CARD, "123", "456");
+    final var payment2 = Payment.factory(200.00, PaymentStatus.PENDING, PaymentMethod.CREDIT_CARD, "789", "101");
 
     Assertions.assertNotEquals(payment1.getId(), payment2.getId());
   }

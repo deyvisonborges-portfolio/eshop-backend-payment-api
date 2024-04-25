@@ -1,6 +1,6 @@
 package com.eshop.backendpaymentapi;
 
-import com.eshop.backendpaymentapi.app.configuration.object_mapper.ObjectMapperConfig;
+// import com.eshop.backendpaymentapi.app.configuration.object_mapper.ObjectMapperConfig;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -12,8 +12,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @ActiveProfiles("test")
-@JsonTest(includeFilters = {
-  @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ObjectMapperConfig.class)
-})
+// @JsonTest(includeFilters = {
+//   @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ObjectMapperConfig.class)
+// })
 public @interface JacksonTestAnnotation {
 }
