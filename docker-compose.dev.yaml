@@ -32,6 +32,15 @@ services:
     networks:
       - eshop-payment-api-network
 
+  wiremock:
+    image: "wiremock/wiremock:latest"
+    ports:
+      - 127.0.0.1:8080:8080
+    volumes:
+      - ./wiremock/__files:/home/wiremock/__files
+      - ./wiremock/mappings:/home/wiremock/mappings
+    entrypoint: ["/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose"]
+
 networks:
   eshop-payment-api-network:
     name: eshop-payment-api-network

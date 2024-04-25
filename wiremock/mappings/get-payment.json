@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/payments/SDF9S-SDF90SDF-SDF90SDF-FDS"
+  },
+
+  "response": {
+    "status": 200,
+    "body": "{\"id\":\"SDF9S-SDF90SDF-SDF90SDF-FDS\",\"value\":10.00,\"status\":\"OPEN\",\"method\":\"CREDIT_CARD\"}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
