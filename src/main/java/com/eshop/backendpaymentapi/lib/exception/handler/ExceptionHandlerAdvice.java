@@ -1,6 +1,7 @@
 package com.eshop.backendpaymentapi.lib.exception.handler;
 
 import com.eshop.backendpaymentapi.lib.exception.BadRequestException;
+import com.eshop.backendpaymentapi.lib.exception.InternalErrorException;
 import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
 import com.eshop.backendpaymentapi.lib.exception.UnauthorizedException;
 import com.eshop.backendpaymentapi.lib.exception.dto.ErrorResponseRecord;
@@ -43,6 +44,13 @@ public class ExceptionHandlerAdvice {
 	public ResponseEntity<ErrorResponseRecord> nullPointerException(NullPointerException n) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
 				new ErrorResponseRecord(n.getMessage(), HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value())
+		);
+	}
+
+  @ExceptionHandler(InternalErrorException.class)
+	public ResponseEntity<ErrorResponseRecord> internalError(InternalError n) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+				new ErrorResponseRecord(n.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value())
 		);
 	}
 }

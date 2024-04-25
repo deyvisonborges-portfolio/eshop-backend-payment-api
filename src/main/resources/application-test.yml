@@ -2,6 +2,9 @@ h2:
   url: jdbc:h2:mem:payments_db;MODE=MYSQL;DATABASE_TO_LOWER=TRUE
 
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
   flyway:
     enabled: true
     url: ${h2.url}

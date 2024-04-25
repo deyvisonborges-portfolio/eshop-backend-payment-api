@@ -3,7 +3,6 @@ package com.eshop.backendpaymentapi.core.artifacts.payment.usecase.commands.crea
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentMethod;
 import com.eshop.backendpaymentapi.core.artifacts.payment.constant.PaymentStatus;
 
-
 public record CreatePaymentCommand(
   double value,
   PaymentStatus status,

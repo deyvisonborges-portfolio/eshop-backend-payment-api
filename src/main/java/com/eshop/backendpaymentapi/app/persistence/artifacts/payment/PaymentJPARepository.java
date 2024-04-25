@@ -5,9 +5,8 @@ import com.eshop.backendpaymentapi.core.artifacts.payment.Payment;
 import com.eshop.backendpaymentapi.core.artifacts.payment.PaymentSearchQuery;
 import com.eshop.backendpaymentapi.core.artifacts.payment.repository.PaymentRepositoryContract;
 import com.eshop.backendpaymentapi.lib.Pagination;
+import com.eshop.backendpaymentapi.lib.exception.InternalErrorException;
 import com.eshop.backendpaymentapi.lib.exception.NotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 
 @Repository
 public class PaymentJPARepository implements PaymentRepositoryContract {
-  private final Logger logger = LoggerFactory.getLogger(PaymentJPARepository.class);
   private final PaymentJPARepositoryContract repositoryContract;
 
 	public PaymentJPARepository(PaymentJPARepositoryContract repositoryContract) {
@@ -33,8 +31,7 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
       final var jpaPayment = this.repositoryContract.save(PaymentJPAEntity.from(payment));
       return PaymentJPAEntity.toAggregate(jpaPayment);
     } catch (Exception e) {
-      this.logger.info("Repository -> Error while saving payment", e);
-      throw e;
+      throw new InternalErrorException(e.getMessage());
     }
   }
 
@@ -49,8 +46,7 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
       this.findById(id);
       this.repositoryContract.deleteById(id);
     } catch (Exception e) {
-      this.logger.info(MessageFormat.format("Error while delete Payment with id: {0}", id), e);
-      throw e;
+      throw new InternalErrorException(e.getMessage());
     }
   }
 
@@ -65,22 +61,27 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
         );
       return Optional.of(PaymentJPAEntity.toAggregate(paymentOpt));
     } catch (Exception e) {
-      this.logger.info(MessageFormat.format("Error while fetching Payment with id: {0}", id), e);
-      throw e;
+      throw new InternalErrorException(e.getMessage());
     }
   }
 
   @Override
   public void saveAll(List<Payment> payments) {
-    final var entities = payments.stream()
+    try {
+      final var entities = payments.stream()
       .map(PaymentJPAEntity::from)
-      .collect(Collectors.toList()); // Coletar as entidades mapeadas em uma lista
-    this.repositoryContract.saveAll(entities); // Salvar a lista de entidades
+      .collect(Collectors.toList());
+    this.repositoryContract.saveAll(entities);
+    } catch (Exception e) {
+      throw new InternalErrorException(e.getMessage());
+    }
+
   }
 
   @Override
   public Pagination<Payment> findAll(final PaymentSearchQuery query) {
-    /*
+    try {
+      /*
     * Pagination
     * */
     final var page = PageRequest.of(
@@ -109,10 +110,17 @@ public class PaymentJPARepository implements PaymentRepositoryContract {
       pageResult.getTotalElements(),
       pageResult.map(PaymentJPAEntity::toAggregate).toList()
     );
+    } catch (Exception e) {
+      throw new InternalErrorException(e.getMessage());
+    }
   }
 
   @Override
   public List<Payment> findAll() {
-    return this.repositoryContract.findAll().stream().map(PaymentJPAEntity::toAggregate).toList();
+    try {
+      return this.repositoryContract.findAll().stream().map(PaymentJPAEntity::toAggregate).toList();
+    } catch (Exception e) {
+      throw new InternalErrorException(e.getMessage());
+    }
   }
 }
